@@ -1,0 +1,3 @@
+Name: suman.txt
+Age: 12
+Address: KTM
