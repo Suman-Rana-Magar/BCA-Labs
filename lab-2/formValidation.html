@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+  </head>
+  <body>
+    <form name="myform">
+      <label for="name">Name: </label>
+      <input type="text" id="name" name="name" /><br />
+      <label for="username">Username: </label>
+      <input type="text" id="username" name="username" /><br />
+      <label for="email">Email: </label>
+      <input type="email" id="email" name="email" /><br />
+      <label for="password">Password: </label>
+      <input type="password" id="password" name="password" /><br />
+      <input type="button" value="submit" onclick="formValidation()" />
+    </form>
+    <script>
+      function formValidation() {
+        let name = document.myform.name.value.trim();
+        if (name == null || name == "") {
+          alert("Plese enter your name");
+          return false;
+        }
+        let username = document.myform.username.value.trim();
+        if (username == null || username == "") {
+          alert("Plese enter your username");
+          return false;
+        }
+        let email = document.myform.email.value.trim();
+        if (email == null || email == "") {
+          alert("Plese enter your email");
+          return false;
+        } else if (!email.includes("@")) {
+          alert("Email must contain @");
+          return false;
+        }
+        let password = document.myform.password.value.trim();
+        if (password == null || password == "") {
+          alert("Plese enter your password");
+          return false;
+        } else if (password.length < 6) {
+          alert("Password must be atleast 6 characters");
+          return false;
+        }
+        console.log(name, username, email, password);
+      }
+    </script>
+  </body>
+</html>

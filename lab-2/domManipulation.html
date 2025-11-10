@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Manupulation</title>
+  </head>
+  <body>
+    <form>
+      <label for="number">Enter No.</label>
+      <input type="number" id="number" name="number" /><br />
+      <input type="button" value="cube" onclick="getCube()" />
+    </form>
+    <script type="text/javascript">
+      function getCube() {
+        let number = document.getElementById("number").value;
+        alert(number * number * number);
+      }
+    </script>
+  </body>
+</html>

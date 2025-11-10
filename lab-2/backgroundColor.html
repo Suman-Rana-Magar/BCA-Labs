@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Change Background color</title>
+  </head>
+  <body>
+    <input
+      type="button"
+      value="Change Background"
+      onclick="changeBackgroundColor()"
+    />
+    <script>
+      function changeBackgroundColor() {
+        let body = document.getElementsByTagName("body");
+        console.log(body);
+        let colors = ["red", "blue", "green", "yellow", "black"];
+        let i = 0;
+        setInterval(function () {
+          document.body.style.backgroundColor = colors[i];
+          i++;
+          if (i == 5) i = 0;
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>
