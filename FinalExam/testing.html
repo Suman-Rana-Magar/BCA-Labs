@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
+  </head>
+  <body>
+    <ul type="square">
+      <li>
+        Ram
+        <ol type="A">
+          <li>ram 1</li>
+          <li>ram 2</li>
+          <li>ram 3</li>
+        </ol>
+      </li>
+      <li>Shyam</li>
+      <li>Hari</li>
+      <li>
+        Gita
+        <dl>
+          <dt>Gita 1</dt>
+          <dd>Gita 1 is a type of gita</dd>
+        </dl>
+      </li>
+      <li>Sita</li>
+      <li>Gobinda</li>
+    </ul>
+
+    <a href="https://www.google.com" target="_blank">Google</a>
+
+    <embed
+      src="https://www.facebook.com/photo/?fbid=1135157318646163&set=a.614071344088099"
+      type="facebook/post"
+    />
+    <iframe
+      src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fofficialroutineofnepalbanda%2Fposts%2Fpfbid0mGaoGhSX6RogCcMJFckpwSrXpFUicvDXyL2Kv8RXVmyxZ7QFdmuwXA2ru88X2uXbl&show_text=true&width=500"
+      width="500"
+      height="628"
+      style="border: none; overflow: hidden"
+      scrolling="no"
+      frameborder="0"
+      allowfullscreen="true"
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+    ></iframe>
+
+    <object
+      data="web.pdf"
+      type="application/pdf"
+      height="400px"
+      width="300px"
+    ></object>
+
+    <img
+      src="sagun chand.png"
+      usemap="#chandu"
+      alt="chandu"
+      height="200px"
+      width="200px"
+    />
+    <map name="chandu">
+      <area
+        shape="rect"
+        coords="34,44,270,350"
+        href="https://usa.com"
+        alt="USA"
+      />
+      <area
+        shape="circle"
+        coords="337,300,50"
+        href="https://india.com"
+        alt="India"
+      />
+      <area
+        shape="poly"
+        coords="130,120,140,160,180,200"
+        href="https://japan.com"
+        alt="Japan"
+      />
+    </map>
+
+    <table border="1px">
+      <caption>
+        Routine ho ahi
+      </caption>
+      <tr>
+        <th colspan="4">Routine</th>
+      </tr>
+      <tr>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th rowspan="4">Break</th>
+        <th>Tuesday</th>
+      </tr>
+      <tr>
+        <td>WT</td>
+        <td>DSA</td>
+        <td>Sad</td>
+      </tr>
+      <tr>
+        <td>Java</td>
+        <td>Statistics</td>
+        <td>Maths</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </table>
+
+    <ul type="circle">
+      <li>
+        FOHSS
+        <ul type="square">
+          <li>
+            BCA
+            <ol type="1">
+              <li>IoT</li>
+            </ol>
+          </li>
+        </ul>
+      </li>
+      <li>
+        FOM
+        <ol>
+          <ol type="1">
+            <li>BIM</li>
+            <li>IoT</li>
+          </ol>
+        </ol>
+      </li>
+    </ul>
+
+    <form action="#">
+      <fieldset>
+        <legend>Fill User Details</legend>
+        <label for="first_name">First Name</label>
+        <input
+          type="text"
+          id="first_name"
+          name="first_name"
+          autocomplete="on"
+          required
+          autofocus
+        /><br /><br />
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" /><br /><br />
+        <label for="">Gender</label>
+        <input type="radio" name="gender" id="male" checked />
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" />
+        <label for="female">female</label>
+        <input type="radio" id="other" name="gender" />
+        <label for="other">other</label><br /><br />
+        <label for="">Subject</label>
+        <input type="checkbox" name="Subject" id="C" />
+        <label for="C">C</label>
+        <input type="checkbox" id="Java" name="Subject" checked />
+        <label for="Java">Java</label>
+        <input type="checkbox" id="PHP" name="Subject" />
+        <label for="PHP">PHP</label><br /><br />
+        <label for="comments">Comments</label>
+        <input type="text" id="comments" /><br /><br />
+        <button type="submit" style="background-color: lightgreen">
+          Submit
+        </button>
+        <button type="reset" style="background-color: red">Reset</button>
+      </fieldset>
+    </form>
+
+    <form action="/submit-form" method="post" enctype="multipart/form-data">
+      <!-- Text Field -->
+      <label for="fullname">Full Name:</label>
+      <input
+        type="text"
+        id="fullname"
+        name="fullname"
+        placeholder="Enter your full name"
+        required
+      /><br /><br />
+
+      <!-- Email Field -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br /><br />
+
+      <!-- Password Field -->
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      /><br /><br />
+
+      <!-- Number Field -->
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="0" max="100" /><br /><br />
+
+      <!-- Radio Buttons -->
+      <label>Gender:</label><br />
+      <input type="radio" id="male" name="gender" value="male" />
+      <label for="male">Male</label><br />
+      <input type="radio" id="female" name="gender" value="female" />
+      <label for="female">Female</label><br /><br />
+
+      <!-- Checkboxes -->
+      <label>Hobbies:</label><br />
+      <input type="checkbox" name="hobbies" value="reading" /> Reading<br />
+      <input type="checkbox" name="hobbies" value="sports" /> Sports<br />
+      <input type="checkbox" name="hobbies" value="traveling" />
+      Traveling<br /><br />
+
+      <!-- Dropdown / Select -->
+      <label for="country">Country:</label>
+      <select id="country" name="country">
+        <option value="">--Select--</option>
+        <option value="nepal">Nepal</option>
+        <option value="india">India</option>
+        <option value="usa">USA</option></select
+      ><br /><br />
+
+      <!-- Textarea -->
+      <label for="message">Message:</label><br />
+      <textarea
+        id="message"
+        name="message"
+        rows="4"
+        cols="40"
+        placeholder="Write something..."
+      ></textarea
+      ><br /><br />
+
+      <!-- File Upload -->
+      <label for="profile">Upload Profile Picture:</label>
+      <input type="file" id="profile" name="profile" /><br /><br />
+
+      <!-- Submit and Reset Buttons -->
+      <input type="submit" value="Register" />
+      <input type="reset" value="Clear" />
+    </form>
+  </body>
+</html>
