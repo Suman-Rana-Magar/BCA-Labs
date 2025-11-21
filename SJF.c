@@ -1,86 +1,45 @@
 #include <stdio.h>
 
-struct Process {
-    int at;   // Arrival Time
-    int bt;   // Burst Time
-    int ct;   // Completion Time
-    int tat;  // Turnaround Time
-    int wt;   // Waiting Time
-    int rt;   // Response Time
-    int done; // Completion flag
-};
+typedef struct {
+    int pid, at, bt, ct, tat, wt, rt, start;
+} Process;
 
 int main() {
-    int processNum;
-    printf("Enter the no. of processes: ");
-    scanf("%d", &processNum);
+    int n, i, completed = 0, time = 0;
+    printf("Enter number of processes: ");
+    scanf("%d", &n);
 
-    struct Process p[processNum];
-    
-    for (int i = 0; i < processNum; i++) {
-        printf("\nEnter the arrival time (AT) of process P%d: ", i + 1);
-        scanf("%d", &p[i].at);
-        if (p[i].at < 0) {
-            printf("Negative arrival time detected! Setting AT = 0.\n");
-            p[i].at = 0;
-        }
-        printf("Enter the burst time (BT) of process P%d: ", i + 1);
-        scanf("%d", &p[i].bt);
-        if (p[i].bt <= 0) {
-            printf("Invalid burst time! Setting BT = 1.\n");
-            p[i].bt = 1;
-        }
-        p[i].done = 0;
+    Process p[n];
+    int done[n]; // to track completed
+    for(i=0;i<n;i++){
+        p[i].pid=i+1;
+        printf("Enter AT and BT of P%d: ", i+1);
+        scanf("%d%d", &p[i].at, &p[i].bt);
+        done[i]=0;
     }
 
-    int completed = 0, currentTime = 0;
-    float totalWT = 0, totalTAT = 0;
+    while(completed<n){
+        int idx=-1, min=1e9;
+        for(i=0;i<n;i++)
+            if(!done[i] && p[i].at<=time && p[i].bt<min){ min=p[i].bt; idx=i; }
+        if(idx==-1){ time++; continue; }
 
-    while (completed < processNum) {
-        int idx = -1;
-        int minBT = 99999;
-
-        // Find process with minimum BT among arrived and not done
-        for (int i = 0; i < processNum; i++) {
-            if (p[i].at <= currentTime && p[i].done == 0) {
-                if (p[i].bt < minBT) {
-                    minBT = p[i].bt;
-                    idx = i;
-                } 
-                else if (p[i].bt == minBT && p[i].at < p[idx].at) {
-                    // if tie, prefer one that arrived earlier
-                    idx = i;
-                }
-            }
-        }
-
-        if (idx == -1) {
-            currentTime++; // move time if nothing has arrived
-        } else {
-            p[idx].ct = currentTime + p[idx].bt;        // Completion time
-            p[idx].tat = p[idx].ct - p[idx].at;         // Turnaround time
-            p[idx].wt = p[idx].tat - p[idx].bt;         // Waiting time
-            p[idx].rt = p[idx].wt;                      // Response time
-            p[idx].done = 1;
-
-            totalWT += p[idx].wt;
-            totalTAT += p[idx].tat;
-
-            completed++;
-            currentTime = p[idx].ct; // Update time
-        }
+        p[idx].start = (time>p[idx].at)?time:p[idx].at;
+        p[idx].rt = p[idx].start - p[idx].at;
+        time = p[idx].start + p[idx].bt;
+        p[idx].ct = time;
+        p[idx].tat = p[idx].ct - p[idx].at;
+        p[idx].wt = p[idx].tat - p[idx].bt;
+        done[idx]=1;
+        completed++;
     }
 
-    // Print table
-    printf("\nProcess\tAT\tBT\tCT\tTAT\tWT\tRT\n");
-    for (int i = 0; i < processNum; i++) {
+    double totalTAT=0, totalRT=0;
+    printf("\nSJF Scheduling:\nP\tAT\tBT\tCT\tTAT\tWT\tRT\n");
+    for(i=0;i<n;i++){
         printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
-               i + 1, p[i].at, p[i].bt, p[i].ct, p[i].tat, p[i].wt, p[i].rt);
+               p[i].pid,p[i].at,p[i].bt,p[i].ct,p[i].tat,p[i].wt,p[i].rt);
+        totalTAT+=p[i].tat; totalRT+=p[i].rt;
     }
-
-    // Averages
-    printf("\nAverage Waiting Time (AWT): %.2f", totalWT / processNum);
-    printf("\nAverage Turnaround Time (ATAT): %.2f\n", totalTAT / processNum);
-
-    return 0;
+    printf("\nAverage TAT = %.2f\nAverage RT = %.2f\n", totalTAT/n, totalRT/n);
 }

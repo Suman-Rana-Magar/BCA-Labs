@@ -1,87 +1,54 @@
 #include <stdio.h>
 
-struct Process {
-    int at;   // Arrival Time
-    int bt;   // Burst Time
-    int ct;   // Completion Time
-    int tat;  // Turnaround Time
-    int wt;   // Waiting Time
-    int rt;   // Remaining Time
-};
+typedef struct {
+    int pid, at, bt, ct, tat, wt, rt, start, rem;
+} Process;
 
 int main() {
-    int n, tq;
+    int n,i,timeq;
     printf("Enter number of processes: ");
-    scanf("%d", &n);
+    scanf("%d",&n);
 
-    struct Process p[n];
-    
-    for (int i = 0; i < n; i++) {
-        printf("\nEnter Arrival Time (AT) for Process P%d: ", i + 1);
-        scanf("%d", &p[i].at);
-        if (p[i].at < 0) {
-            printf("Negative arrival time detected! Setting AT = 0.\n");
-            p[i].at = 0;
-        }
-
-        printf("Enter Burst Time (BT) for Process P%d: ", i + 1);
-        scanf("%d", &p[i].bt);
-        if (p[i].bt <= 0) {
-            printf("Invalid burst time! Setting BT = 1.\n");
-            p[i].bt = 1;
-        }
-
-        p[i].rt = p[i].bt;  // Initialize remaining time
-        p[i].ct = p[i].tat = p[i].wt = 0;
+    Process p[n];
+    for(i=0;i<n;i++){
+        p[i].pid=i+1;
+        printf("Enter AT and BT of P%d: ", i+1);
+        scanf("%d%d",&p[i].at,&p[i].bt);
+        p[i].rem=p[i].bt;
+        p[i].start=-1;
     }
 
-    printf("\nEnter Time Quantum: ");
-    scanf("%d", &tq);
+    printf("Enter Time Quantum: ");
+    scanf("%d",&timeq);
 
-    int completed = 0, currentTime = 0;
-    float totalWT = 0, totalTAT = 0;
-    int done[n];
-    for (int i = 0; i < n; i++) done[i] = 0;
-
-    // Queue simulation
-    while (completed < n) {
-        int flag = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (p[i].at <= currentTime && p[i].rt > 0) {
-                flag = 1; // A process is available
-                if (p[i].rt > tq) {
-                    currentTime += tq;
-                    p[i].rt -= tq;
-                } else {
-                    currentTime += p[i].rt;
-                    p[i].rt = 0;
-                    p[i].ct = currentTime;
-                    p[i].tat = p[i].ct - p[i].at;
-                    p[i].wt = p[i].tat - p[i].bt;
-                    totalWT += p[i].wt;
-                    totalTAT += p[i].tat;
-                    done[i] = 1;
+    int t=0, completed=0;
+    while(completed<n){
+        int idle=1;
+        for(i=0;i<n;i++){
+            if(p[i].rem>0 && p[i].at<=t){
+                idle=0;
+                if(p[i].start==-1) p[i].start=t;
+                int run=(p[i].rem>timeq?timeq:p[i].rem);
+                t+=run;
+                p[i].rem-=run;
+                if(p[i].rem==0){
                     completed++;
+                    p[i].ct=t;
+                    p[i].tat=p[i].ct-p[i].at;
+                    p[i].wt=p[i].tat-p[i].bt;
+                    p[i].rt=p[i].start-p[i].at;
                 }
             }
         }
-
-        if (flag == 0) {
-            // If no process has arrived yet, move time ahead
-            currentTime++;
-        }
+        if(idle) t++;
     }
 
-    // Output results
-    printf("\nProcess\tAT\tBT\tCT\tTAT\tWT\n");
-    for (int i = 0; i < n; i++) {
-        printf("P%d\t%d\t%d\t%d\t%d\t%d\n",
-               i + 1, p[i].at, p[i].bt, p[i].ct, p[i].tat, p[i].wt);
+    double totalTAT=0,totalRT=0;
+    printf("\nRound Robin Scheduling:\nP\tAT\tBT\tCT\tTAT\tWT\tRT\n");
+    for(i=0;i<n;i++){
+        printf("P%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
+               p[i].pid,p[i].at,p[i].bt,p[i].ct,p[i].tat,p[i].wt,p[i].rt);
+        totalTAT+=p[i].tat; totalRT+=p[i].rt;
     }
-
-    printf("\nAverage Waiting Time: %.2f", totalWT / n);
-    printf("\nAverage Turnaround Time: %.2f\n", totalTAT / n);
-
-    return 0;
+    printf("\nAverage TAT = %.2f\nAverage RT = %.2f\n", totalTAT/n,totalRT/n);
 }
