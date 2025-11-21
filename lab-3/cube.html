@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cube</title>
+</head>
+<body>
+    <h1>Cube Calculator</h1>
+    <input type="number" id="numberInput" placeholder="Enter a number">
+    <button onclick="calculateCube()">Calculate Cube</button>
+    <p id="cubeResult"></p>
+    <script>
+        function calculateCube() {
+            // Access the input element by its ID
+            const input = document.getElementById('numberInput');
+            const value = Number(input.value); // Convert string to number
+            const cube = value ** 3; // Calculate cube
+            document.getElementById('cubeResult').innerText = `Cube: ${cube}`;
+        }
+    </script>
+</body>
+</html>

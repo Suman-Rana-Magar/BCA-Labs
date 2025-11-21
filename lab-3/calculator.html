@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <form onsubmit="return calculate()">
+        <input type="number" id="operand1" placeholder="Operand 1">
+        <input type="number" id="operand2" placeholder="Operand 2">
+        <br><br>
+        <button type="button" onclick="calculate('add')">Add</button>
+        <button type="button" onclick="calculate('sub')">Subtract</button>
+        <button type="button" onclick="calculate('mul')">Multiply</button>
+        <button type="button" onclick="calculate('div')">Divide</button>
+        <button type="button" onclick="calculate('mod')">Modulus</button>
+    </form>
+    <p>Result: <span id="result"></span></p>
+    <script>
+    function calculate(operation) {
+        const op1 = Number(document.getElementById('operand1').value);
+        const op2 = Number(document.getElementById('operand2').value);
+        let res;
+        switch(operation) {
+            case 'add': res = op1 + op2; break;
+            case 'sub': res = op1 - op2; break;
+            case 'mul': res = op1 * op2; break;
+            case 'div': res = op1 / op2; break;
+            case 'mod': res = op1 % op2; break;
+            default: res = 'Invalid operation';
+        }
+        document.getElementById('result').innerText = res;
+    }
+    </script>    
+</body>
+</html>
