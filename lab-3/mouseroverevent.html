@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mouse Events Example</title>
+    <script>
+        function handleClick() {
+            document.getElementById("clickMsg").innerHTML = "Button was clicked!";
+        }
+
+        function handleMouseover() {
+            alert("Mouseover detected on paragraph!");
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Click and Mouseover Events</h2>
+
+    <button onclick="handleClick()">Click Me</button>
+    <p id="clickMsg"></p>
+
+    <p onmouseover="handleMouseover()">Hover your mouse over this paragraph.</p>
+
+</body>
+
+</html>

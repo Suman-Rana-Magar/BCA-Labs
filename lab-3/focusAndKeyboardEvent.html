@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Keyboard Events Example</title>
+    <script>
+        function changeBackground(el) {
+            el.style.background = "lightblue";
+        }
+        function keydownAlert() {
+            alert("A key was pressed!");
+        }
+    </script>
+</head>
+
+<body>
+    <h2>Focus and Keydown Events</h2>
+    <input type="text" placeholder="Click to focus" onfocus="changeBackground(this)">
+    <br><br>
+    <input type="text" placeholder="Press any key" onkeydown="keydownAlert()">
+</body>
+</html>
