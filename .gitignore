@@ -1,0 +1,17 @@
+# Compiled binaries generated in this repo
+bresenham
+bresenham-test
+DDA
+DDA-Checker
+DDA
+DDA-Checker
+
+# Common C/C++ build outputs
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.so
+*.dll
+*.dylib
