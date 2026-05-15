@@ -1,1 +1,0 @@
-gcc DDA.c -o DDA -lGL -lglfw -lGLEW -lm
